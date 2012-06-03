@@ -8,8 +8,8 @@
   ([_ [x . _]])
   ([_ [_ . r]] (member x r)))
 
-(defne takeout [x s r]
-  ([_ [x . r] _])
+(defne takeout [x s result]
+  ([_ [x . r] r])
   ([_ [h . t] [h . r]] (takeout x t r)))
 
 (defne subset [small-s big-s]
@@ -27,3 +27,9 @@
      (fresh [w]
             (perm y w) (takeout x ys w)))
   ([[] []]))
+
+(defne substract [bs s1 s2]
+  ([_ [] bs])
+   ([_ [h . t] _]
+     (fresh [r]
+            (takeout h bs r) (substract r t s2))))
